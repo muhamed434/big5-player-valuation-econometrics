@@ -1,0 +1,28 @@
+project:
+  name: "Big-5 Football Player Valuation Econometrics"
+  authors:
+    - "Mukhamedzhan Kadir"
+    - "Yerkanat Manapuly"
+  version: "1.0.0"
+
+data:
+  sample_path: "data/sample/players_sample.csv"
+  dependent_variable: "log_market_value"
+
+model_parameters:
+  significance_level: 0.05
+  max_vif_threshold: 5.0
+  control_variables:
+    - "minutes_played"
+    - "contract_years"
+    - "club_tier"
+
+position_metrics:
+  defender:
+    - "tackles_per90"
+    - "interceptions_per90"
+    - "duel_win_pct"
+  midfielder:
+    - "prog_passes_per90"
+  forward:
+    - "xg_per90"
