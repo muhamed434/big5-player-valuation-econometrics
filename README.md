@@ -38,12 +38,12 @@ big5-player-valuation-econometrics/
 
 ## Planned Benchmarks
 
-| Model Specification | Target Sample | Explanatory Variables | Primary Metric ($R^2$) | Guardrail Metric |
+| Model Specification | Target Sample | Explanatory Variables | Primary Metric (R²) | Guardrail Metric |
 | :--- | :--- | :--- | :--- | :--- |
-| **Baseline OLS** | All Positions | Age, Age$^2$, Goals+Assists/90, Minutes | $R^2$, Adjusted $R^2$ | VIF < 5.0 |
-| **Defenders Model** | Defenders | Age, Age$^2$, Tackles/90, Interceptions/90 | Adjusted $R^2$, p-value | Breusch-Pagan p > 0.05 |
-| **Midfielders Model** | Midfielders | Age, Age$^2$, Progressive Passes/90 | Adjusted $R^2$, p-value | Breusch-Pagan p > 0.05 |
-| **Forwards Model** | Forwards | Age, Age$^2$, Expected Goals (xG)/90 | Adjusted $R^2$, p-value | Breusch-Pagan p > 0.05 |
+| **Baseline OLS** | All Positions | Age, Age², Goals+Assists/90, Minutes | R², Adjusted R² | VIF < 5.0 |
+| **Defenders Model** | Defenders | Age, Age², Tackles/90, Interceptions/90 | Adjusted R², p-value | Breusch-Pagan p > 0.05 |
+| **Midfielders Model** | Midfielders | Age, Age², Progressive Passes/90 | Adjusted R², p-value | Breusch-Pagan p > 0.05 |
+| **Forwards Model** | Forwards | Age, Age², Expected Goals (xG)/90 | Adjusted R², p-value | Breusch-Pagan p > 0.05 |
 
 ---
 
