@@ -1,3 +1,7 @@
+![Python](https://img.shields.io/badge/Python-3.10-blue)
+![License](https://img.shields.io/badge/License-MIT-green)
+![Docker](https://img.shields.io/badge/Docker-Ready-blue)
+![Framework](https://img.shields.io/badge/Econometrics-OLS-orange)
 # Econometric Analysis of Market Value Drivers in Big-5 European Football
 
 ## Authors
