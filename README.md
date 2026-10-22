@@ -81,23 +81,3 @@ python src/benchmark.py
 ## License
 
 This project is licensed under the terms of the MIT License.
-
-# Byte-compiled / optimized
-__pycache__/
-*.py[cod]
-*$py.class
-.venv/
-venv/
-ENV/
-env/
-.ipynb_checkpoints/
-
-# Generated Output & Benchmark Artifacts
-docs/benchmark_output.json
-output/
-logs/
-*.log
-
-# OS generated
-.DS_Store
-Thumbs.db
