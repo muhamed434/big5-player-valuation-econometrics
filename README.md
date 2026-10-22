@@ -81,3 +81,23 @@ python src/benchmark.py
 ## License
 
 This project is licensed under the terms of the MIT License.
+## 🖥️ System Requirements
+
+- **Operating System:** Linux / macOS / Windows 10+ (WSL2 recommended)
+- **Python Version:** Python 3.10.13
+- **Containerization:** Docker 24.0+ (Optional for containerized run)
+- **Hardware:** Minimum 2 CPU cores, 4 GB RAM, 1 GB free disk space
+
+## 📜 Citation
+
+If you use this benchmark pipeline or methodology in your research, please cite our repository:
+
+```bibtex
+@misc{kadir2024big5valuation,
+  author = {Kadir, Mukhamedzhan and Manapuly, Yerkanat},
+  title = {Main factors affecting football players' market value in Big-5 European leagues: an econometric analysis by position groups},
+  year = {2024},
+  publisher = {GitHub},
+  journal = {GitHub repository},
+  howpublished = {\url{[https://github.com/muhamed434/big5-player-valuation-econometrics](https://github.com/muhamed434/big5-player-valuation-econometrics)}}
+}
