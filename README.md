@@ -99,5 +99,5 @@ If you use this benchmark pipeline or methodology in your research, please cite 
   year = {2024},
   publisher = {GitHub},
   journal = {GitHub repository},
-  howpublished = {\url{[https://github.com/muhamed434/big5-player-valuation-econometrics](https://github.com/muhamed434/big5-player-valuation-econometrics)}}
+  howpublished = {\url{https://github.com/muhamed434/big5-player-valuation-econometrics}}
 }
