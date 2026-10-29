@@ -94,7 +94,7 @@ If you use this benchmark pipeline or methodology in your research, please cite 
 
 ```bibtex
 @misc{kadir2024big5valuation,
-  author = {Kadir, Mukhamedzhan and Manapuly, Yerkanat},
+  author = {Mukhamedzhan Kadir and Yerkanat Manapuly},
   title = {Main factors affecting football players' market value in Big-5 European leagues: an econometric analysis by position groups},
   year = {2024},
   publisher = {GitHub},
