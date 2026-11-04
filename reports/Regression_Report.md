@@ -49,24 +49,23 @@ The raw market value distribution exhibits significant right-skewness, which is 
 
 We estimate three sequential OLS specifications using **HC1 Robust Standard Errors** to account for conditional heteroskedasticity, followed by tree-based machine learning baselines.
 
-### Table 1: OLS Model Comparison (Dependent Variable: $\ln(\text{Market Value})$)
+### Table 1: OLS Model Comparison (Dependent Variable: ln(Market Value))
 
 | Variable / Metric | Model 1 (Baseline) | Model 2 (Positional) | Model 3 (Full Specification) |
 | :--- | :---: | :---: | :---: |
-| **Intercept ($\beta_0$)** | $12.451^{***}$ | $12.210^{***}$ | $11.980^{***}$ |
-| **Age ($\beta_1$)** | $0.252^{***}$ | $0.248^{***}$ | $0.241^{***}$ |
-| **Age² ($\beta_2$)** | $-0.0043^{***}$ | $-0.0042^{***}$ | $-0.0041^{***}$ |
-| **Forward Dummy** | — | $+0.219^{***}$ | $+0.198^{***}$ |
-| **Midfielder Dummy** | — | $+0.102^{**}$ | $+0.088^{*}$ |
-| **Minutes Played** | $+0.0003^{***}$ | $+0.0003^{***}$ | $+0.0002^{***}$ |
-| **Contract Years Remaining** | $+0.151^{***}$ | $+0.148^{***}$ | $+0.142^{***}$ |
+| **Intercept (β₀)** | 12.451\*\*\* | 12.210\*\*\* | 11.980\*\*\* |
+| **Age (β₁)** | 0.252\*\*\* | 0.248\*\*\* | 0.241\*\*\* |
+| **Age² (β₂)** | -0.0043\*\*\* | -0.0042\*\*\* | -0.0041\*\*\* |
+| **Forward Dummy** | — | +0.219\*\*\* | +0.198\*\*\* |
+| **Midfielder Dummy** | — | +0.102\*\* | +0.088\* |
+| **Minutes Played** | +0.0003\*\*\* | +0.0003\*\*\* | +0.0002\*\*\* |
+| **Contract Years Remaining** | +0.151\*\*\* | +0.148\*\*\* | +0.142\*\*\* |
 | **Positional Per-90 Metrics** | No | No | Yes |
-| **Sample Size ($N$)** | 1,200 | 1,200 | 1,200 |
-| **Adjusted $R^2$** | **0.6620** | **0.7185** | **0.7639** |
-| **F-statistic (p-value)** | $< 0.001$ | $< 0.001$ | $< 0.001$ |
+| **Sample Size (N)** | 1,200 | 1,200 | 1,200 |
+| **Adjusted R²** | **0.6620** | **0.7185** | **0.7639** |
+| **F-statistic (p-value)** | < 0.001 | < 0.001 | < 0.001 |
 
-*\*p < 0.1, **p < 0.05, ***p < 0.01 (HC1 Robust Standard Errors in parentheses)*
-
+\*p < 0.1, \*\*p < 0.05, \*\*\*p < 0.01 (HC1 Robust Standard Errors in parentheses)
 ---
 
 ### Table 2: Comparative Machine Learning Baselines
