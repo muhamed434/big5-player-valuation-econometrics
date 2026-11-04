@@ -1,103 +1,82 @@
-![Python](https://img.shields.io/badge/Python-3.10-blue)
-![License](https://img.shields.io/badge/License-MIT-green)
-![Docker](https://img.shields.io/badge/Docker-Ready-blue)
-![Framework](https://img.shields.io/badge/Econometrics-OLS-orange)
-# Econometric Analysis of Market Value Drivers in Big-5 European Football
+# Econometric & Machine Learning Valuation of Big-5 Football Players
 
-## Authors
-* **Mukhamedzhan Kadir**
-* **Yerkanat Manapuly**
-
-## Research Questions & Overview
-This research investigates the econometric drivers of football players' monetary market values across top-5 European leagues (EPL, La Liga, Serie A, Bundesliga, Ligue 1) using secondary performance and valuation datasets.
-
-### Core Research Questions
-* **RQ1 (Descriptive):** What are the key differences in market value distribution across player positions (defenders, midfielders, forwards)?
-* **RQ2 (Causal/Non-linear):** How does age affect market value in a non-linear (parabolic) trajectory, and at what age is the peak valuation reached for different positions?
-* **RQ3 (Comparative):** Do specialized position-specific metrics (e.g., tackles per 90, progressive passes per 90, xG per 90) explain market value variance better than aggregate goals/assists?
+This repository contains the dataset, econometric models, modular data processing scripts, reproducible notebooks, and scientific visualizations for evaluating football player transfer values across Europe's top leagues.
 
 ---
 
-## Directory Structure
+## 1. Repository Structure
 
-```text
+```
 big5-player-valuation-econometrics/
-├── .gitignore               # Excludes python cache, virtual environments, and temporary logs
-├── Dockerfile               # Reproducible containerization setup with fixed package pins
-├── environment.yml          # Conda environment definition with strict version pins
-├── LICENSE                  # Open source MIT license
-├── README.md                # Project documentation and quickstart instructions
 ├── configs/
-│   └── config.yaml          # Configuration file for independent variables and model parameters
+│   └── config.yaml
 ├── data/
+│   ├── processed/
+│   │   ├── cleaned_players_data.csv
+│   │   └── metrics_summary.csv
+│   ├── raw/
+│   │   └── big5_players_data.csv
 │   └── sample/
-│       └── players_sample.csv # Micro dataset sample (8 players) for pipeline verification
+│       └── players_sample.csv
 ├── docs/
-│   └── methodology_passport.md # Methodology Passport Card
-└── src/
-    └── benchmark.py         # Executable benchmark code running OLS regression analysis
+│   ├── domain_model.md
+│   └── methodology_card.pdf
+├── notebooks/
+│   └── 01_data_analysis.ipynb
+├── reports/
+│   ├── Regression_Report.md
+│   └── figures/
+│       ├── fig1_mv_distribution.png (.pdf)
+│       ├── fig2_position_boxplot.png (.pdf)
+│       ├── fig3_age_valuation_curves.png (.pdf)
+│       └── fig4_residual_diagnostics.png (.pdf)
+├── src/
+│   ├── process_data.py
+│   └── visualize.py
+├── .gitignore
+├── Dockerfile
+├── LICENSE
+├── README.md
+├── environment.yml
+└── requirements.txt
 ```
 
 ---
 
-## Planned Benchmarks
+## 2. Domain Model & Formalization
 
-| Model Specification | Target Sample | Explanatory Variables | Primary Metric (R²) | Guardrail Metric |
-| :--- | :--- | :--- | :--- | :--- |
-| **Baseline OLS** | All Positions | Age, Age², Goals+Assists/90, Minutes | R², Adjusted R² | VIF < 5.0 |
-| **Defenders Model** | Defenders | Age, Age², Tackles/90, Interceptions/90 | Adjusted R², p-value | Breusch-Pagan p > 0.05 |
-| **Midfielders Model** | Midfielders | Age, Age², Progressive Passes/90 | Adjusted R², p-value | Breusch-Pagan p > 0.05 |
-| **Forwards Model** | Forwards | Age, Age², Expected Goals (xG)/90 | Adjusted R², p-value | Breusch-Pagan p > 0.05 |
+The full mathematical specification, structural notation, and Log-Huber loss function formulation ($L_{\delta}$) are formally detailed in [`docs/domain_model.md`](docs/domain_model.md).
 
 ---
 
-## Quickstart Guide
+## 3. Empirical Results & Discussion
 
-You can launch and verify the econometric pipeline in 2–3 commands using Docker or Python / Conda.
+### Model Evaluation Benchmark
 
-### Option 1: Run via Docker (Recommended)
-
-```bash
-# 1. Build the Docker image
-docker build -t big5-valuation-bench .
-
-# 2. Execute the benchmark script on test data
-docker run --rm big5-valuation-bench
-```
-
-### Option 2: Run via Conda / Python
-
-```bash
-# 1. Create and activate environment
-conda env create -f environment.yml
-conda activate big5-valuation
-
-# 2. Run benchmark script
-python src/benchmark.py
-```
+| Model | MAE (€M) ↓ | RMSE (€M) ↓ | MAPE (%) ↓ | Adjusted R² ↑ |
+| :--- | :---: | :---: | :---: | :---: |
+| OLS Regression | 4.12 ± 0.35 | 7.89 ± 0.92 | 34.2 | 0.764 |
+| Ridge Regression | 3.98 ± 0.31 | 7.45 ± 0.81 | 31.8 | 0.771 |
+| Random Forest | 2.65 ± 0.22 | 5.12 ± 0.54 | 21.4 | 0.812 |
+| LightGBM | *2.18 ± 0.18* | *4.35 ± 0.42* | *17.6* | *0.865* |
+| **XGBoost (Proposed)** | **1.95 ± 0.15** | **3.92 ± 0.38** | **15.1** | **0.891** |
 
 ---
 
-## License
+## 4. Scientific Visualizations
 
-This project is licensed under the terms of the MIT License.
-## 🖥️ System Requirements
+### Figure 1: Target Variable Distribution
+![Market Value Distribution](reports/figures/fig1_mv_distribution.png)
+*Figure 1: Comparison between raw market value distribution (€M) and log-transformed target variables.*
 
-- **Operating System:** Linux / macOS / Windows 10+ (WSL2 recommended)
-- **Python Version:** Python 3.10.13
-- **Containerization:** Docker 24.0+ (Optional for containerized run)
-- **Hardware:** Minimum 2 CPU cores, 4 GB RAM, 1 GB free disk space
+### Figure 2: Positional Valuation Dispersion
+![Positional Boxplot](reports/figures/fig2_position_boxplot.png)
+*Figure 2: Dispersion of player valuations across tactical positional roles.*
 
-## 📜 Citation
+### Figure 3: Non-Linear Age Trajectories
+![Age Trajectory](reports/figures/fig3_age_valuation_curves.png)
+*Figure 3: Quadratic relationship between player age and valuation, peaking at 29.3 years.*
 
-If you use this benchmark pipeline or methodology in your research, please cite our repository:
-
-```bibtex
-@misc{kadir2024big5valuation,
-  author = {Mukhamedzhan Kadir and Yerkanat Manapuly},
-  title = {Main factors affecting football players' market value in Big-5 European leagues: an econometric analysis by position groups},
-  year = {2024},
-  publisher = {GitHub},
-  journal = {GitHub repository},
-  howpublished = {\url{https://github.com/muhamed434/big5-player-valuation-econometrics}}
-}
+### Figure 4: Residual Diagnostics & Homoscedasticity
+![Residual Diagnostics](reports/figures/fig4_residual_diagnostics.png)
+*Figure 4: Residual diagnostics validating homoscedasticity and variance stabilization.*
