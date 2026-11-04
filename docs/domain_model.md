@@ -8,7 +8,7 @@ $$\min_{\boldsymbol{\theta}} \mathcal{L}(\boldsymbol{\theta}) = \frac{1}{N} \sum
 
 Where $L_{\delta}(y_i, \hat{y}_i)$ is mathematically defined as:
 
-$$L_{\delta}(y_i, \hat{y}_i) = \begin{cases} \frac{1}{2}\left(\ln y_i - \ln \hat{y}_i\right)^2 & \text{if } |\ln y_i - \ln \hat{y}_i| \le \delta \\[8pt] \delta \cdot |\ln y_i - \ln \hat{y}_i| - \frac{1}{2}\delta^2 & \text{otherwise} \end{cases}$$
+$$L_{\delta}(y_i, \hat{y}_i) = \begin{cases} \frac{1}{2}\left(\ln y_i - \ln \hat{y}_i\right)^2 & \text{if } |\ln y_i - \ln \hat{y}_i| \le \delta \\ \delta \cdot |\ln y_i - \ln \hat{y}_i| - \frac{1}{2}\delta^2 & \text{otherwise} \end{cases}$$
 
 ---
 
