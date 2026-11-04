@@ -22,7 +22,9 @@ big5-player-valuation-econometrics/
 │   ├── domain_model.md
 │   └── methodology_card.pdf
 ├── notebooks/
-│   └── 01_data_analysis.ipynb
+│   ├── notebooks_01_data_analysis.ipynb
+│   ├── notebooks_02_econometric_modeling.ipynb
+│   └── notebooks_03_diagnostics_and_robustness.ipynb
 ├── reports/
 │   ├── Regression_Report.md
 │   └── figures/
