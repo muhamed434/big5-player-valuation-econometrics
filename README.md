@@ -62,8 +62,22 @@ All models are evaluated on out-of-fold predictions back-transformed to Euros ($
 
 ## 4. Visual Artifacts Summary
 
-- **Figure 1 (`fig1_mv_distribution`):** Contrasts right-skewed raw market values (€M) against the approximately symmetric natural-log distribution $\ln(\text{Market Value})$.
-- **Figure 2 (`fig2_position_boxplot`):** Illustrates median and interquartile dispersion of $\ln(\text{Market Value})$ across Forwards (median €75.40M), Midfielders (median €57.33M), and Defenders (median €44.01M).
-- **Figure 3 (`fig3_age_valuation_curves`):** Displays quadratic age valuation curves with 95% confidence intervals stratified by tactical position.
-- **Figure 4 (`fig4_residual_diagnostics`):** Validates OLS residual homoskedasticity (Breusch-Pagan $\text{LM} = 12.73, p = 0.6233$) and near-normal Q-Q alignment.
-- 
+### Figure 1: Market Value Distribution (Raw vs. Log-Transformed)
+Contrasts right-skewed raw market values (€M) against the approximately symmetric natural-log distribution $\ln(\text{Market Value})$.
+
+![Figure 1](reports/figures/fig1_mv_distribution.png)
+
+### Figure 2: Log Market Value by Tactical Position
+Illustrates median and interquartile dispersion of $\ln(\text{Market Value})$ across Forwards (median €75.40M), Midfielders (median €57.33M), and Defenders (median €44.01M).
+
+![Figure 2](reports/figures/fig2_position_boxplot.png)
+
+### Figure 3: Quadratic Age Valuation Curves
+Displays quadratic age valuation curves with 95% confidence intervals stratified by tactical position.
+
+![Figure 3](reports/figures/fig3_age_valuation_curves.png)
+
+### Figure 4: OLS Residual & Normality Diagnostics
+Validates OLS residual homoskedasticity (Breusch-Pagan $\text{LM} = 12.73, p = 0.6233$) and near-normal Q-Q alignment.
+
+![Figure 4](reports/figures/fig4_residual_diagnostics.png)
