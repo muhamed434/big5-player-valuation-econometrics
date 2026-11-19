@@ -65,7 +65,7 @@ All models are evaluated on out-of-fold predictions back-transformed to Euros ($
 ### Figure 1: Market Value Distribution (Raw vs. Log-Transformed)
 Contrasts right-skewed raw market values (€M) against the approximately symmetric natural-log distribution $\ln(\text{Market Value})$.
 
-![Figure 1](reports/figures/fig1_mv_distribution.png)
+![Figure 1](reports/fig1_mv_distribution.png)
 
 ### Figure 2: Log Market Value by Tactical Position
 Illustrates median and interquartile dispersion of $\ln(\text{Market Value})$ across Forwards (median €75.40M), Midfielders (median €57.33M), and Defenders (median €44.01M).
