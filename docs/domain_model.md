@@ -2,13 +2,13 @@
 
 ## 1. Mathematical Formulation
 
-To resolve extreme value distortions (outliers) in football transfer markets while ensuring robustness across average player valuations, we apply a **Log-Huber Loss** optimization criterion combined with $L_2$ regularization:
+To resolve extreme right-skewness and heteroskedasticity in football transfer markets while ensuring robustness across positional tiers, we model the natural logarithm of market value with quadratic age dynamics and heteroskedasticity-consistent ($\text{HC1}$) covariance estimation, benchmarked against $L_2$-regularized and tree-ensemble estimators:
 
-$$\min_{\boldsymbol{\theta}} \mathcal{L}(\boldsymbol{\theta}) = \frac{1}{N} \sum_{i=1}^{N} L_{\delta}(y_i, f(\mathbf{x}_i; \boldsymbol{\theta})) + \lambda \|\boldsymbol{\theta}\|_2^2$$
+$$\ln(y_i) = \beta_0 + \sum_{k} \gamma_k \text{Position}_{ik} + \beta_1 \text{Age}_i + \beta_2 \text{Age}_i^2 + \mathbf{z}_i^\top \boldsymbol{\delta} + \mathbf{p}_i^\top \boldsymbol{\phi} + \varepsilon_i$$
 
-Where $L_{\delta}(y_i, \hat{y}_i)$ is mathematically defined as:
+For regularized benchmark comparisons, we minimize the $L_2$-penalized squared error objective on the log-transformed scale:
 
-$$L_{\delta}(y_i, \hat{y}_i) = \begin{cases} \frac{1}{2}\left(\ln y_i - \ln \hat{y}_i\right)^2 & \text{if } |\ln y_i - \ln \hat{y}_i| \le \delta \\ \delta \cdot |\ln y_i - \ln \hat{y}_i| - \frac{1}{2}\delta^2 & \text{otherwise} \end{cases}$$
+$$\min_{\boldsymbol{\theta}} \mathcal{L}(\boldsymbol{\theta}) = \frac{1}{N} \sum_{i=1}^{N} \left(\ln y_i - f(\mathbf{x}_i; \boldsymbol{\theta})\right)^2 + \lambda \|\boldsymbol{\theta}\|_2^2$$
 
 ---
 
@@ -16,18 +16,19 @@ $$L_{\delta}(y_i, \hat{y}_i) = \begin{cases} \frac{1}{2}\left(\ln y_i - \ln \hat
 
 | Notation | Type | Domain Description |
 | :--- | :--- | :--- |
-| $N$ | Scalar | Total number of evaluated players ($N = 1,200$) |
-| $\mathbf{x}_i \in \mathbb{R}^d$ | Vector | Feature vector for player $i$ (Age, xG, xA, Minutes, Position) |
+| $N$ | Scalar | Total evaluated players with $\ge 90$ minutes played ($N = 1,200$: 431 Defenders, 407 Midfielders, 362 Forwards) |
+| $\mathbf{x}_i \in \mathbb{R}^d$ | Vector | Full feature vector for player $i$ (Position, League, Club Tier, Age, Minutes, Contract Years, Position Metrics) |
+| $\mathbf{z}_i$ | Vector | Control variables (`minutes_played`, `contract_years`, `club_tier`, `league`) |
+| $\mathbf{p}_i$ | Vector | Position-specific performance metrics (`tackles_per90`, `prog_passes_per90`, `xg_per90`) |
 | $y_i \in \mathbb{R}^+$ | Scalar | Observed market value in Euros (€) |
-| $\hat{y}_i = f(\mathbf{x}_i; \boldsymbol{\theta})$ | Scalar | Model predicted market value |
-| $\boldsymbol{\theta}$ | Vector | Model parameters / weights |
-| $\delta$ | Scalar | Huber threshold parameter separating quadratic and linear loss |
-| $\lambda$ | Scalar | $L_2$ regularization penalty strength |
+| $\hat{y}_i = \exp(f(\mathbf{x}_i; \boldsymbol{\theta}))$ | Scalar | Back-transformed model predicted market value (€) |
+| $\lambda$ | Scalar | $L_2$ regularization penalty strength ($\lambda = 1.5$ for Ridge) |
 
 ---
 
-## 3. Evaluation Metrics & Target Specifications
+## 3. Evaluation Metrics & Guardrail Specifications
 
-- **Primary Valuation Metric:** Mean Absolute Error ($\text{MAE} = \frac{1}{N}\sum |y_i - \hat{y}_i|$)
-- **Goodness-of-Fit Metric:** Coefficient of Determination ($R^2$)
-- **Guardrail Metric:** Mean Absolute Percentage Error ($\text{MAPE} \le 18.0\%$)
+- **Primary Valuation Metric:** Mean Absolute Error in Millions ($\text{MAE} = \frac{1}{N}\sum |y_i - \hat{y}_i| / 10^6$)
+- **Tail-Sensitive Error Metric:** Root Mean Squared Error ($\text{RMSE} = \sqrt{\frac{1}{N}\sum (y_i - \hat{y}_i)^2} / 10^6$)
+- **Goodness-of-Fit Metric:** Adjusted Coefficient of Determination ($\text{Adjusted } R^2$)
+- **Multicollinearity Guardrail:** Variance Inflation Factor ($\text{VIF} < 5.0$ via mean-centered age terms)
